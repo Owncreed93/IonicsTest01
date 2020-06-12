@@ -24,6 +24,17 @@ export class DeseosService {
 
     this.guardarStorage();
 
+    return nuevaLista.id;
+
+  }
+
+  obtenerLista( id: string|number){
+    id = Number(id);
+
+    return this.listas.find( listaData => {
+      return listaData.id === id;
+    });
+
   }
 
   guardarStorage() {
