@@ -16,7 +16,6 @@ export class Tab1Page {
                public alertCtl: AlertController ) {  }
 
   async agregarLista() {
-    
 
     const alert = await this.alertCtl.create({
       cssClass: 'my-custom-class',
@@ -55,5 +54,16 @@ export class Tab1Page {
 
     await alert.present();
 
+  }
+
+  listaSeleccionada( lista: Lista){
+
+    console.log(lista);
+
+    if ( lista ){
+      this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`);
+    } else {
+      console.log('Nada chulls esto no es id en lo absoluto');
+    }
   }
 }
