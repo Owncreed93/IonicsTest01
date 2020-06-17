@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DeseosService } from '../../services/deseos.service';
-import { Lista } from 'src/app/models/lista.model';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -56,14 +55,4 @@ export class Tab1Page {
 
   }
 
-  listaSeleccionada( lista: Lista){
-
-    console.log(lista);
-
-    if ( lista ){
-      this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`);
-    } else {
-      console.log('Nada chulls esto no es id en lo absoluto');
-    }
-  }
 }

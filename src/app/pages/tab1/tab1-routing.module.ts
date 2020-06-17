@@ -11,10 +11,6 @@ const routes: Routes = [
     path: 'agregar/:listaId',
     loadChildren: () => import('../agregar/agregar.module').then( m => m.AgregarPageModule)
   },
-  // {
-  //   path: 'agregar',
-  //   loadChildren: () => import('./pages/agregar/agregar.module').then( m => m.AgregarPageModule)
-  // }
 ];
 
 @NgModule({

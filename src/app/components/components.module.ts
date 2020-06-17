@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; // * WORKS WITH *ng directives
 import { ListasComponent } from './listas/listas.component';
+import { IonicModule } from '@ionic/angular';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -12,7 +14,9 @@ import { ListasComponent } from './listas/listas.component';
     ListasComponent // * ALLOWS YOU TO USE IT IN OTHER COMPONENTS
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule,
+    PipesModule
   ]
 })
 export class ComponentsModule { }
