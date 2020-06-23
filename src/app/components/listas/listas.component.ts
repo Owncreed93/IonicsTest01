@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DeseosService } from '../../services/deseos.service';
 import { Router } from '@angular/router';
 import { Lista } from '../../models/lista.model';
+import { AlertController, IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-listas',
@@ -10,11 +11,13 @@ import { Lista } from '../../models/lista.model';
 })
 export class ListasComponent implements OnInit {
 
+  @ViewChild( IonList ) lista: IonList;
   @Input() terminada = true;
 
   constructor(
     public deseosService: DeseosService,
     private router: Router,
+    public alertCtl: AlertController
   ) { }
 
 
@@ -30,6 +33,48 @@ export class ListasComponent implements OnInit {
       this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`);
     }
 
+  }
+
+  async editarLista( lista: Lista) {
+    const alert = await this.alertCtl.create({
+      cssClass: 'my-custom-class',
+      header: 'Editar lista',
+      inputs: [
+        {
+          name: 'titulo',
+          type: 'text',
+          value: lista.titulo,
+          placeholder: 'Nombre de la lisa'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            this.lista.closeSlidingItems();
+          }
+        },
+        {
+          text: 'Actualizar',
+          handler: (data) => {
+            console.log(data);
+
+            if (data.titulo.length === 0){
+              return;
+            }
+
+            lista.titulo = data.titulo;
+
+            this.deseosService.guardarStorage();
+
+            this.lista.closeSlidingItems();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   borrarLista( lista: Lista){
